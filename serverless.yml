@@ -4,6 +4,9 @@ service:
 #app: your-app-name
 #org: your-org-name
 
+package:
+  individually: true
+
 custom:
   webpack:
     webpackConfig: ./webpack.config.js
