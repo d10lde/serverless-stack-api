@@ -1,8 +1,7 @@
 import uuid from "uuid";
-import * as AWS from "aws-sdk";
+import * as dynamoDbLib from "./libs/dynamodb-lib";
+import { success, failure } from "./libs/response-lib";
 import { APIGatewayProxyHandler } from 'aws-lambda';
-
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 export const main: APIGatewayProxyHandler = async (event, _context) => {
   try {
@@ -26,30 +25,11 @@ export const main: APIGatewayProxyHandler = async (event, _context) => {
         createdAt: Date.now()
       }
     }
-    await dynamoDb.put(params).promise()
+    await dynamoDbLib.call("put", params)
     // Set response headers to enable CORS (Cross-Origin Resource Sharing)
-    const headers = {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Credentials": true
-    }
-    // Return status code 200 and the newly created item
-    return {
-      statusCode: 200,
-      headers: headers,
-      body: JSON.stringify(params.Item)
-    }
+    return success(params.Item)
   } catch (e) {
-    // Set response headers to enable CORS (Cross-Origin Resource Sharing)
-    const headers = {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Credentials": true
-    }
-    // Return status code 500 on error
-    return {
-      statusCode: 500,
-      headers: headers,
-      body: JSON.stringify({ status: false })
-    }
+    return failure({ status: false })
 
   }
 }
