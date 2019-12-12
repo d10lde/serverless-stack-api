@@ -18,7 +18,7 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
       - name: Install Serverless CLI
-        run: npm i -g serverless
+        run: sudo npm i -g serverless
       - name: Install dependencies
         run: |
           sudo npm install
