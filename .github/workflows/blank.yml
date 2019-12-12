@@ -24,4 +24,5 @@ jobs:
           sudo npm install
       - name: Deploy to Dev
         run: |
+          echo env | grep STRIPE_SECRET_KEY
           sudo serverless deploy -s dev
