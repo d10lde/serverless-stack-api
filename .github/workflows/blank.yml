@@ -22,3 +22,6 @@ jobs:
       - name: Install dependencies
         run: |
           npm install
+      - name: Deploy to Dev
+        run: |
+          serverless deploy -s dev
