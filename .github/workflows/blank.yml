@@ -25,6 +25,7 @@ jobs:
       - name: Deploy to Dev
         env: # Or as an environment variable
           STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.DEV_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.DEV_AWS_SECRET_ACCESS_KEY }}
         run: |
-          echo ${STRIPE_SECRET_KEY}
-          #sudo serverless deploy -s dev
+          sudo serverless deploy -s dev
