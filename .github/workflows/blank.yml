@@ -23,6 +23,8 @@ jobs:
         run: |
           sudo npm install
       - name: Deploy to Dev
+        env: # Or as an environment variable
+          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
         run: |
           echo ${STRIPE_SECRET_KEY}
           #sudo serverless deploy -s dev
